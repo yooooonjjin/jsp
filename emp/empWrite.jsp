@@ -17,12 +17,14 @@ int empno = rs.getInt(1);
 String sql3 = " select distinct(job) from emp where job != 'PRESIDENT' ";
 ResultSet rs3 = stmt.executeQuery(sql3);
 
+
 // 부서정보 목록
 String sql2 = "select deptno,dname,loc from dept2 order by dname";
 Statement stmt2 = con.createStatement();
 ResultSet rs2 = stmt2.executeQuery(sql2);
 
 // 매니저 목록
+// 암호 : 123456
 String sql4 = "select empno,ename from emp where job='MANAGER' or job='PRESIDENT'";
 Statement stmt4 = con.createStatement();
 ResultSet rs4 = stmt4.executeQuery(sql4);
@@ -36,6 +38,8 @@ ResultSet rs4 = stmt4.executeQuery(sql4);
 	<title>사원 등록 화면</title>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
+
+<!-- 암호 : 123456 -->
 
 <script>
 function fn_submit() {
@@ -66,7 +70,6 @@ function fn_submit() {
 		document.frm.hiredate.focus();
 		return false;
 	}
-
 	// 현재창의 폼을 전송한다.
 	// submit() :: 전송기능의 내장함수
 	document.frm.submit();
@@ -83,9 +86,11 @@ function fn_submit() {
  <div class="div_top_button">
  	<!-- return false : submit버튼 기능의 전송기능을 없애는 세팅 -->
  	<!-- submit버튼 :: 전송기능,{enter}버튼의 인식 -->
+    
     <button type="submit" onClick="fn_submit(); return false;">저장</button>
     <button type="reset">취소</button>
-    <button type="button" onClick="">목록</button>
+    <button type="button" onClick="location='empList.jsp'">목록</button>
+
  </div>
 
 <table>
@@ -147,7 +152,8 @@ function fn_submit() {
 	<tr>
 		<th><label for="deptno">부서</label></th>
 		<td style="text-align:left;">
-			<select name="deptno1" id="deptno" class="select1">
+		
+			<select name="deptno" id="deptno" class="select1">
 			<%
 			while( rs2.next() ) {
 				String dno = rs2.getString(1);

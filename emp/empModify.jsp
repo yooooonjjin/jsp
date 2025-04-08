@@ -6,44 +6,44 @@
 
 <%
 // 파라메터 값 설정
-String empno = request.getParameter("empno");
-
-if( empno == null || empno.equals("") ) {
-%>
-	<script>
-		alert("잘못된 접근!!");
+ String empno = request.getParameter("empno");
+ if( empno == null || empno.equals("") ) {
+ %>
+		<script>
+		alert("잘못된 접근!!!");
 		location = "empList.jsp";
-	</script>
-<%
-	return;	// 프로그램 중단
-}
+		</script>
+ <% 
+ 		return;  // 프로그램 중단
+ }
 
-String sql = " SELECT	EMPNO										"
-		   + "			,ENAME										"
-		   + "			,JOB										"	
-		   + "			,MGR										"
-		   + "			,to_char(HIREDATE,'yyyy-mm-dd') HIREDATE	"
-		   + "			,SAL										"
-		   + "			,COMM										"
-		   + "			,DEPTNO										"
-		   + " FROM													"
-		   + "			emp											"
-		   + " WHERE	empno='"+empno+"'							";
+ String sql = " select   EMPNO "
+		 	+ "			,ENAME "
+		 	+ "			,JOB "
+		 	+ "			,MGR "
+		 	+ "			,to_char(HIREDATE,'yyyy-mm-dd') HIREDATE "
+		 	+ "			,SAL "
+		 	+ "			,COMM "
+		 	+ "			,DEPTNO "
+		 	+ " from   "
+		 	+ "        emp "
+		 	+ " where  empno='"+empno+"' ";
 
-ResultSet rs = stmt.executeQuery(sql);
-rs.next();
+ ResultSet rs = stmt.executeQuery(sql);
+ rs.next();
 
-String ename	= rs.getString("ename");
-String job		= rs.getString("job");
-String deptno	= rs.getString("deptno");
-String mgr		= rs.getString("mgr");
-String hiredate	= rs.getString("hiredate");
-String sal		= rs.getString("sal");
-String comm		= rs.getString("comm");
+ String ename    = rs.getString("ename");
+ String job      = rs.getString("job");
+ String deptno   = rs.getString("deptno");
+ String mgr      = rs.getString("mgr");
+ String hiredate = rs.getString("hiredate");
+ String sal      = rs.getString("sal");
+ String comm     = rs.getString("comm");
 
 //업무 목록
 String sql3 = " select distinct(job) from emp where job != 'PRESIDENT' ";
 ResultSet rs3 = stmt.executeQuery(sql3);
+
 
 // 부서정보 목록
 String sql2 = "select deptno,dname,loc from dept2 order by dname";
@@ -54,15 +54,18 @@ ResultSet rs2 = stmt2.executeQuery(sql2);
 String sql4 = "select empno,ename from emp where job='MANAGER' or job='PRESIDENT'";
 Statement stmt4 = con.createStatement();
 ResultSet rs4 = stmt4.executeQuery(sql4);
+
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>사원 정보 수정 화면</title>
+	<title>사원 수정 화면</title>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
+
+<!-- 암호 : 123456 -->
 
 <script>
 function fn_submit() {
@@ -93,7 +96,6 @@ function fn_submit() {
 		document.frm.hiredate.focus();
 		return false;
 	}
-
 	// 현재창의 폼을 전송한다.
 	// submit() :: 전송기능의 내장함수
 	document.frm.submit();
@@ -105,14 +107,12 @@ function fn_submit() {
     사원 정보 수정
  </div>
 
-<form name="frm" method="post" action="empWriteSave.jsp">
+<form name="frm" method="post" action="empModifySave.jsp">
 
  <div class="div_top_button">
- 	<!-- return false : submit버튼 기능의 전송기능을 없애는 세팅 -->
- 	<!-- submit버튼 :: 전송기능,{enter}버튼의 인식 -->
     <button type="submit" onClick="fn_submit(); return false;">저장</button>
     <button type="reset">취소</button>
-    <button type="button" onClick="">목록</button>
+    <button type="button" onClick="location='empList.jsp'">목록</button>
  </div>
 
 <table>
@@ -136,7 +136,8 @@ function fn_submit() {
 			while( rs3.next() ) {
 				String job3 = rs3.getString(1);
 			%>
-				<option value="<%=job3 %>"><%=job3 %></option>
+			<option value="<%=job3 %>" 
+				<% if(job3.equals(job)){ out.print("selected"); } %> ><%=job3 %></option>
 			<%
 			}
 			%>
@@ -152,7 +153,8 @@ function fn_submit() {
 				String sno = rs4.getString(1);
 				String snm = rs4.getString(2);
 			%>
-				<option value="<%=sno %>"><%=snm %></option>
+				<option value="<%=sno %>" 
+				  <% if(sno.equals(mgr)){out.print("selected");} %> ><%=snm %></option>
 			<%
 			}
 			%>
@@ -174,14 +176,16 @@ function fn_submit() {
 	<tr>
 		<th><label for="deptno">부서</label></th>
 		<td style="text-align:left;">
-			<select name="deptno1" id="deptno" class="select1">
+		
+			<select name="deptno" id="deptno" class="select1">
 			<%
 			while( rs2.next() ) {
 				String dno = rs2.getString(1);
 				String dnm = rs2.getString(2);
 				String loc = rs2.getString(3);
 			%>
-				<option value="<%=dno %>"><%=dnm %> (<%=loc %>)</option>
+				<option value="<%=dno %>" 
+				 <% if(dno.equals(deptno)){ out.print("selected"); } %> ><%=dnm %> (<%=loc %>)</option>
 			<%
 			}
 			%>

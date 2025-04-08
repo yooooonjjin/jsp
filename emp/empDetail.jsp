@@ -84,7 +84,7 @@ String grade	= rs.getString("grade");
 <body>
 
  <div class="div_title">
-    사원 정보
+    사원 상세 화면
  </div>
 
 <form name="frm" method="post" action="empWriteSave.jsp">
@@ -93,8 +93,8 @@ String grade	= rs.getString("grade");
  	<!-- return false : submit버튼 기능의 전송기능을 없애는 세팅 -->
  	<!-- submit버튼 :: 전송기능,{enter}버튼의 인식 -->
  	<button type="button" onClick="location='empList.jsp'">목록</button>
- 	<button type="button" onClick="location='empDelete.jsp?empno=<%=empno %>'">삭제</button>
  	<button type="button" onClick="location='empModify.jsp?empno=<%=empno %>'">수정</button>
+ 	<button type="button" onClick="location='empPassWrite.jsp?empno=<%=empno %>'">삭제</button>
  </div>
 
 <table>
