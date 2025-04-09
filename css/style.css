@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+a {
+	text-decoration :none;
+}
+
+
+table {
+	width : 100%;
+	border-collapse : collapse; /* 셀과 셀 사이의 여백 제거 */
+} 
+th, td {
+	border : 1px solid #ccc;
+	padding : 3px;
+	text-align : center;
+	font-size : 12px;
+}
+
+.div_title {
+	width : 100%;
+	text-align : center;
+	font-size : 16px;
+	font-weight : bold;
+	margin-bottom : 5px;
+}
+
+.div_top_button {
+	width : 100%;
+	text-align : right;
+	margin-bottom : 5px;
+}
+.div_top_button button {
+	cursor : pointer;
+	font-size : 12px;
+}
+
+.input1 {
+	width: 98%;
+	font-size : 12px;
+	padding : 3px;
+}
+
+.select1 {
+	display: flex;
+	width : 70%;
+	padding : 3px;
+	font-size : 12px; 
+}
+
+.div_page {
+	width : 100%;
+	margin : 10px 0;
+	text-align : center;
+}
+.div_page a {
+	font-size : 16px;
+	padding : 0 3px;
+}
+
+.textarea1 {
+	width: 98%;
+	height : 100px;
+	font-size : 12px;
+	padding : 3px;
+}
