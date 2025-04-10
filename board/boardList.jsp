@@ -10,7 +10,9 @@
 	ResultSet rs2 = stmt.executeQuery(sql2);
 	rs2.next();
 	int total = rs2.getInt(1);
-  
+	
+	int pageRownum = total;
+	
 	String sql = " select seqid  	"
 	           + "       ,title  	"
 	           + "       ,writer	"
@@ -31,7 +33,7 @@
 
 <script>
 	function fn_action() {
-		location = "empWrite.jsp"; 
+		location = "boardWrite.jsp"; 
 	}
 </script> 
 
@@ -44,11 +46,11 @@
 
 	<table border="1">
  	<colgroup>
+ 		<col width="10%"/>
+ 		<col width="*"/>
+ 		<col width="10%"/>
+ 		<col width="10%"/>
  		<col width="15%"/>
- 		<col width="20%"/>
- 		<col width="25%"/>
- 		<col width="20%"/>
- 		<col width="20%"/>
  	</colgroup>
  	<tr>
  		<!-- th:center, bold -->
@@ -67,14 +69,14 @@
  		String rdate	= rs.getString("rdate");
  	%>
  	<tr>
- 		<td><%=total %></td>
- 		<td><%=title %></td>
+ 		<td><%=pageRownum %></td>
+ 		<td style = "text-align:left;">&nbsp;<a href="boardDetail.jsp?seqid=<%=seqid %>"><%=title %></a></td>
  		<td><%=writer %></td>
  		<td><%=hits %></td>
  		<td><%=rdate %></td>
  	</tr>
  	<%
- 		total--;
+ 		pageRownum--;
  	}
  	%>
  </table>

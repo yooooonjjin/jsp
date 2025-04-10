@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 등록 화면</title>
-<link rel = "stylesheet" href="/css/style.css">
+<link rel = "stylesheet" href="/css/style.css" />
 <script src="/js/fn_script.js"></script>
 </head>
 

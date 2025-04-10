@@ -3,6 +3,7 @@
 
 <!-- DB 연결 -->
 <%@ include file="/include/dbcon.jsp" %>
+
 <!-- 파라메터 값 설정 -->
 <%
 String title	= request.getParameter("title");
