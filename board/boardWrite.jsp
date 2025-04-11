@@ -13,14 +13,15 @@
 </head>
 
 <body>
-
-<div class="div_title">게시판 등록 화면</div>
+<div class="div_title">
+	게시판 등록 화면
+</div>
 
 <form name="frm" method="post" action="boardInsert.jsp">
 	<div class="div_top_button">
-    	<button type="submit" onClick="fn_board_submit(); return false;">저장</button>
+    	<button type="submit"onClick="fn_board_submit(); return false;">저장</button>
     	<button type="reset">취소</button>
-    	<button type="button" onClick="location='boardList.jsp'">목록</button>
+    	<button type="button"onClick="location='boardList.jsp'">목록</button>
 	</div>
 
 	<table>

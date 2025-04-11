@@ -20,7 +20,7 @@ if( seqid == null		||
 {
 %>
 	<script>
-		alert("잘못된 접근입니다!!");
+		alert("입력 데이터를 다시 확인해주세요.");
 		location="boardList.jsp";
 	</script>
 <%
@@ -29,38 +29,28 @@ if( seqid == null		||
 %>
 <!-- 출력 SQL 작성 -->
 <%
-String sql = " SELECT count(*) from nboard where pass ='"+pass+"'";
-ResultSet rs = stmt.executeQuery(sql);
-rs.next();
-int cnt = rs.getInt(1);
-if( cnt == 0 ) {
-%>
-	<script>
-		alert("암호를 잘못 입력했습니다.")
-		history.back();
-	</script>	
-<%
-}
-
-String sql2	= " DELETE FROM nboard 				"
+String sql	= " DELETE FROM nboard 				"
 		 	+ " WHERE							"
 		 	+ "				seqid ='"+seqid+"'	"
 		 	+ " AND								"
 		 	+ "				pass = '"+pass+"'";
 
-int result = stmt.executeUpdate(sql2);
-if( result == 0 ) {
+int result = stmt.executeUpdate(sql);
+if( result == 1 ) {
 %>
 	<script>
-		alert("잘못된 접근입니다!!");
+		alert("삭제 완료!!");
 		location="boardList.jsp";
 	</script>
 <%
 } else {
 %>
 	<script>
-		alert("삭제 완료!!");
-		location="boardList.jsp";
+		alert("삭제 실패!!");
+		history.back();	// 이전 화면으로 이동
+		//history.go(-1);		// 이전 화면으로 이동
+		//history.go(-2);	// 이전 이전 화면으로 이동
+		//history.go(1);	// 다음 화면으로 이동
 	</script>
 <%
 }
@@ -71,7 +61,7 @@ if( result == 0 ) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 삭제</title>
 </head>
 <body>
 
